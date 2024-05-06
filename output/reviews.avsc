@@ -1,0 +1,133 @@
+{
+  "type" : "record",
+  "name" : "reviews",
+  "doc" : "Sqoop import of reviews",
+  "fields" : [ {
+    "name" : "id",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "id",
+    "sqlType" : "4"
+  }, {
+    "name" : "app_id",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "app_id",
+    "sqlType" : "4"
+  }, {
+    "name" : "appname",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "appname",
+    "sqlType" : "12"
+  }, {
+    "name" : "review_id",
+    "type" : [ "null", "int" ],
+    "default" : null,
+    "columnName" : "review_id",
+    "sqlType" : "4"
+  }, {
+    "name" : "language",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "language",
+    "sqlType" : "12"
+  }, {
+    "name" : "review",
+    "type" : [ "null", "string" ],
+    "default" : null,
+    "columnName" : "review",
+    "sqlType" : "12"
+  }, {
+    "name" : "time_date_created",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "time_date_created",
+    "sqlType" : "93"
+  }, {
+    "name" : "time_date_updated",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "time_date_updated",
+    "sqlType" : "93"
+  }, {
+    "name" : "recommended",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "recommended",
+    "sqlType" : "-7"
+  }, {
+    "name" : "votes_helpful",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "votes_helpful",
+    "sqlType" : "-5"
+  }, {
+    "name" : "votes_funny",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "votes_funny",
+    "sqlType" : "-5"
+  }, {
+    "name" : "weighted_vote_score",
+    "type" : [ "null", "double" ],
+    "default" : null,
+    "columnName" : "weighted_vote_score",
+    "sqlType" : "8"
+  }, {
+    "name" : "comment_count",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "comment_count",
+    "sqlType" : "-5"
+  }, {
+    "name" : "steam_purchase",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "steam_purchase",
+    "sqlType" : "-7"
+  }, {
+    "name" : "received_for_free",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "received_for_free",
+    "sqlType" : "-7"
+  }, {
+    "name" : "written_during_early_access",
+    "type" : [ "null", "boolean" ],
+    "default" : null,
+    "columnName" : "written_during_early_access",
+    "sqlType" : "-7"
+  }, {
+    "name" : "author_steamid",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "author_steamid",
+    "sqlType" : "-5"
+  }, {
+    "name" : "playtime_forever",
+    "type" : [ "null", "double" ],
+    "default" : null,
+    "columnName" : "playtime_forever",
+    "sqlType" : "8"
+  }, {
+    "name" : "playtime_last_two_weeks",
+    "type" : [ "null", "double" ],
+    "default" : null,
+    "columnName" : "playtime_last_two_weeks",
+    "sqlType" : "8"
+  }, {
+    "name" : "playtime_at_review",
+    "type" : [ "null", "double" ],
+    "default" : null,
+    "columnName" : "playtime_at_review",
+    "sqlType" : "8"
+  }, {
+    "name" : "last_played",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "last_played",
+    "sqlType" : "93"
+  } ],
+  "tableName" : "reviews"
+}

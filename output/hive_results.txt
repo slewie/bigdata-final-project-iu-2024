@@ -1,0 +1,126 @@
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SHOW DATABASES;
++------------------------+
+|     database_name      |
++------------------------+
+| default                |
+| root_db                |
+| team0_projectdb        |
+| team12_hive_projectdb  |
+| team13_projectdb       |
+| team14_projectdb       |
+| team15_projectdb       |
+| team16_projectdb       |
+| team17_projectdb       |
+| team18_projectdb       |
+| team19_projectdb       |
+| team1_projectdb        |
+| team20_projectdb       |
+| team21_projectdb       |
+| team22_projectdb       |
+| team23_projectdb       |
+| team24_projectdb       |
+| team25_projectdb       |
+| team26_projectdb       |
+| team27_projectdb       |
+| team28_projectdb       |
+| team29_projectdb       |
+| team2_projectdb        |
+| team30_projectdb       |
+| team31_projectdb       |
+| team3_projectdb        |
+| team4_projectdb        |
+| team5_projectdb        |
+| team6_projectdb        |
+| team7_projectdb        |
+| team8_projectdb        |
+| team9_projectdb        |
+| testdb                 |
++------------------------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> DROP DATABASE IF EXISTS team27_projectdb CASCADE;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> CREATE DATABASE team27_projectdb LOCATION "project/hive/warehouse";
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> USE team27_projectdb;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SHOW TABLES;
++-----------+
+| tab_name  |
++-----------+
++-----------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> CREATE EXTERNAL TABLE authors STORED AS AVRO LOCATION 'project/warehouse/authors' TBLPROPERTIES ('avro.schema.url'='project/warehouse/avsc/authors.avsc');
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> CREATE EXTERNAL TABLE reviews STORED AS AVRO LOCATION 'project/warehouse/reviews' TBLPROPERTIES ('avro.schema.url'='project/warehouse/avsc/reviews.avsc');
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> -- Check column types
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> DESCRIBE authors;
++--------------+------------+----------+
+|   col_name   | data_type  | comment  |
++--------------+------------+----------+
+| steamid      | bigint     |          |
+| num_games    | bigint     |          |
+| num_reviews  | bigint     |          |
++--------------+------------+----------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> DESCRIBE reviews;
++------------------------------+------------+----------+
+|           col_name           | data_type  | comment  |
++------------------------------+------------+----------+
+| id                           | int        |          |
+| app_id                       | int        |          |
+| appname                      | string     |          |
+| review_id                    | int        |          |
+| language                     | string     |          |
+| review                       | string     |          |
+| time_date_created            | bigint     |          |
+| time_date_updated            | bigint     |          |
+| recommended                  | boolean    |          |
+| votes_helpful                | bigint     |          |
+| votes_funny                  | bigint     |          |
+| weighted_vote_score          | double     |          |
+| comment_count                | bigint     |          |
+| steam_purchase               | boolean    |          |
+| received_for_free            | boolean    |          |
+| written_during_early_access  | boolean    |          |
+| author_steamid               | bigint     |          |
+| playtime_forever             | double     |          |
+| playtime_last_two_weeks      | double     |          |
+| playtime_at_review           | double     |          |
+| last_played                  | bigint     |          |
++------------------------------+------------+----------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> -- For checking the content of tables
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SELECT * FROM authors limit 5;
++--------------------+--------------------+----------------------+
+|  authors.steamid   | authors.num_games  | authors.num_reviews  |
++--------------------+--------------------+----------------------+
+| 76561198079918500  | 394                | 168                  |
+| 76561198042256995  | 199                | 75                   |
+| 76561198199265928  | 317                | 73                   |
+| 76561198023732103  | 287                | 87                   |
+| 76561198030733406  | 228                | 82                   |
++--------------------+--------------------+----------------------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SELECT * FROM reviews limit 5;
++-------------+-----------------+---------------------------+--------------------+-------------------+----------------------------------------------------+----------------------------+----------------------------+----------------------+------------------------+----------------------+------------------------------+------------------------+-------------------------+----------------------------+--------------------------------------+-------------------------+---------------------------+----------------------------------+-----------------------------+----------------------+
+| reviews.id  | reviews.app_id  |      reviews.appname      | reviews.review_id  | reviews.language  |                   reviews.review                   | reviews.time_date_created  | reviews.time_date_updated  | reviews.recommended  | reviews.votes_helpful  | reviews.votes_funny  | reviews.weighted_vote_score  | reviews.comment_count  | reviews.steam_purchase  | reviews.received_for_free  | reviews.written_during_early_access  | reviews.author_steamid  | reviews.playtime_forever  | reviews.playtime_last_two_weeks  | reviews.playtime_at_review  | reviews.last_played  |
++-------------+-----------------+---------------------------+--------------------+-------------------+----------------------------------------------------+----------------------------+----------------------------+----------------------+------------------------+----------------------+------------------------------+------------------------+-------------------------+----------------------------+--------------------------------------+-------------------------+---------------------------+----------------------------------+-----------------------------+----------------------+
+| 39          | 292030          | The Witcher 3: Wild Hunt  | 85174926           | english           | The game is enjoyable enough but...
+-Combat has plenty of options but the game will play for you at times, takes away from player achievements.
+-The Story is good so far but so much of it, listening to every nagging thought is getting old fast.
+-The swords and armor having a level is retarded, how is it that this legendary warrior cannot use the same sword of the 8 guys he just killed. This feature is killing the game for me.
+-The repairs and crafting I hate, its not my thing. never is. | 1611353601000              | 1611353670000              | true                 | 0                      | 0                    | 0.0                          | 0                      | true                    | false                      | false                                | 76561198020027165       | 497.0                     | 370.0                            | 398.0                       | 1611359693000        |
+| 77          | 292030          | The Witcher 3: Wild Hunt  | 85165539           | english           | like dark souls but with witches                   | 1611339545000              | 1611339545000              | true                 | 0                      | 0                    | 0.0                          | 0                      | true                    | false                      | false                                | 76561198983515611       | 325.0                     | 325.0                            | 325.0                       | 1610910917000        |
+| 128         | 292030          | The Witcher 3: Wild Hunt  | 85155206           | english           | They certainly dumbed down the series since the last release. Sure it raked in a larger audience but it sacrificed what is was previously in the process, which was once well written and unique instead became copy-paste and bland. The game completely omits that Triss did nothing but screw Geralt over with everything she's done involving for the Sorceresses Lodge, most likely just to have her as a romance option. This isn't the only thing it omits either.
+
+Nothing says player hand holding like Geralt's *detective vision* removing any player involvement in questing, and Geralt's permanent monologuing to ensure the player knows what they're seeing scene to scene on the rollercoaster. Most quests will follow the same formula of: Talk to person > get told to go somewhere > while at somewhere, learn the person you talked to first is morally dubious > but so is the new person you meet in the quest > get money from either person and move on to next quest.
+
+The combat isn't as good as the predecessor, there's very little thought put into it, which isn't really Witcher-like. Unsure how many variants of "x time of day" wraith there really are, but they're overused in this. 
+
+Gwent was a good minigame, and the minigame shouldn't be more enjoyable than the actual game. Unfortunately, Gwent was also poorly balanced. Fixed by the spin off expansion of Gwent that you can play instead with more balance, but more child friendly too, because swearing is bad.
+
+All in all it's a shame, they had some fantastic ideas in the game that were ruined by trying to dumb everything else down as much as possible. It's also a great and interesting world. The gameplay is dull and generic. Quite the "meh" experience, for what could have been so much more. | 1611326243000              | 1611326243000              | false                | 0                      | 0                    | 0.4761904776096344           | 0                      | true                    | false                      | false                                | 76561198010955177       | 8966.0                    | 0.0                              | 8966.0                      | 1514405793000        |
+| 203         | 292030          | The Witcher 3: Wild Hunt  | 85143577           | schinese          | 确实算得上是一部佳作，主线和支线都不错，dlc太够分量了，特别是酒与血，童话世界里很漂亮，石之心则剧情不错 | 1611312243000              | 1611312243000              | true                 | 0                      | 0                    | 0.0                          | 0                      | true                    | false                      | false                                | 76561198284951183       | 5883.0                    | 0.0                              | 5883.0                      | 1565692029000        |
+| 360         | 292030          | The Witcher 3: Wild Hunt  | 85111865           | koreana           | 수만가지 모드와 함께 즐기는 제 2의 스카이림
+싸이버빵꾸2077때문에 불안하시다구요? 걱정하지 마세요! 위쳐3도 초기 버그는 어마어마했지만 지금은 대부분 다 고쳐졌습니다! | 1611257601000              | 1611257601000              | true                 | 0                      | 0                    | 0.0                          | 0                      | true                    | false                      | false                                | 76561197998454875       | 648.0                     | 0.0                              | 648.0                       | 1610001340000        |
++-------------+-----------------+---------------------------+--------------------+-------------------+----------------------------------------------------+----------------------------+----------------------------+----------------------+------------------------+----------------------+------------------------------+------------------------+-------------------------+----------------------------+--------------------------------------+-------------------------+---------------------------+----------------------------------+-----------------------------+----------------------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 

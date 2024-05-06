@@ -1,0 +1,33 @@
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> USE team27_projectdb;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SHOW TABLES;
++-----------+
+| tab_name  |
++-----------+
+| authors   |
+| reviews   |
++-----------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> CREATE EXTERNAL TABLE authors_buck(
+. . . . . . . . . . . . . . . . . . . . . . .>     steamid bigint,
+. . . . . . . . . . . . . . . . . . . . . . .>     num_games bigint, 
+. . . . . . . . . . . . . . . . . . . . . . .>     num_reviews bigint
+. . . . . . . . . . . . . . . . . . . . . . .> )
+. . . . . . . . . . . . . . . . . . . . . . .>     CLUSTERED BY (steamid) into 20 buckets
+. . . . . . . . . . . . . . . . . . . . . . .>     STORED AS AVRO LOCATION 'project/hive/warehouse/authors_buck' 
+. . . . . . . . . . . . . . . . . . . . . . .>     TBLPROPERTIES ('AVRO.COMPRESS'='SNAPPY');
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> INSERT INTO authors_buck SELECT steamid, num_games, num_reviews FROM authors;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> SELECT * FROM authors_buck limit 1;
++-----------------------+-------------------------+---------------------------+
+| authors_buck.steamid  | authors_buck.num_games  | authors_buck.num_reviews  |
++-----------------------+-------------------------+---------------------------+
+| 76561198017400473     | 239                     | 191                       |
++-----------------------+-------------------------+---------------------------+
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> DROP TABLE authors;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> ALTER TABLE authors_buck RENAME TO authors;
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 
+0: jdbc:hive2://hadoop-03.uni.innopolis.ru:10> 

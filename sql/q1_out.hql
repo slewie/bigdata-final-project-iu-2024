@@ -1,0 +1,6 @@
+USE team27_projectdb;
+
+INSERT OVERWRITE DIRECTORY 'project/output/q1' 
+ROW FORMAT DELIMITED FIELDS 
+TERMINATED BY ',' 
+SELECT * FROM q1_results;

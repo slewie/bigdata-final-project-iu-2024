@@ -1,0 +1,25 @@
+{
+  "type" : "record",
+  "name" : "authors",
+  "doc" : "Sqoop import of authors",
+  "fields" : [ {
+    "name" : "steamid",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "steamid",
+    "sqlType" : "-5"
+  }, {
+    "name" : "num_games",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "num_games",
+    "sqlType" : "-5"
+  }, {
+    "name" : "num_reviews",
+    "type" : [ "null", "long" ],
+    "default" : null,
+    "columnName" : "num_reviews",
+    "sqlType" : "-5"
+  } ],
+  "tableName" : "authors"
+}

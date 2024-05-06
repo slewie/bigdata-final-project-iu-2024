@@ -62,11 +62,11 @@ CREATE TABLE IF NOT EXISTS authors (
 );
 
 INSERT INTO authors(steamid, num_games, num_reviews)
-SELECT DISTINCT("author.steamid") AS steamid,
+SELECT DISTINCT ON("author.steamid") 
+    "author.steamid" AS steamid,
     "author.num_games" AS num_games,
     "author.num_reviews" AS num_reviews
-FROM tmp
-ON CONFLICT (steamid) DO NOTHING;
+FROM tmp;
 
 INSERT INTO reviews(id,
     app_id,
